@@ -131,11 +131,12 @@ public class OpenGraphFilter  extends AbstractFilter {
     }
 
     private String getHostname (RenderContext renderContext) {
+        String schema = renderContext.getRequest().getScheme();
         String host = renderContext.getRequest().getServerName();
         int port = renderContext.getRequest().getServerPort();
-        String hostname = host;
+        String hostname = schema+"://"+host;
         if(port!= 80 && port!= 443){
-            hostname = host + ":" + String.valueOf(port);
+            hostname = hostname + ":" + String.valueOf(port);
         }
         return hostname;
     }
